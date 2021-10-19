@@ -49,10 +49,14 @@ class classChooser: # uppercase characters break when chosen by random
     self.charStr = None
 
     if 'v' == h_or_v:
+      class_list = classChooser.villains
       class_map = classChooser.villains_map
     if 'h' == h_or_v:
+      class_list = classChooser.heroes
       class_map = classChooser.heroes_map
-
+    if selectedClass.lower() not in [c.lower() for c in class_list]:
+      raise ReferenceError("[debug] failed to match charClass, %s, in this list: %s" % (selectedClass, class_list))
+      return(None)
     self.charClass = class_map[selectedClass]
     self.charStr = selectedClass
 
