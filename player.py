@@ -8,7 +8,8 @@ class Player:
   name = 'Player'
 
   # __init__() method initializes new instance of Player
-  def __init__(self, name):
+  def __init__(self, player_or_bot, name):
+    self.p_or_b = player_or_bot # record if this is a human or comp
     self.name = name #what the name of the character your playing is ._.
     self.health = 100 #your health ._. if it <= 0 you die
     self.hpr = 0 #how much health regen_health gives you

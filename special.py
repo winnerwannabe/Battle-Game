@@ -18,8 +18,8 @@ from helper import print_slowly
 class Spiderman(Player): # create child class of Player
   name = 'Spiderman'
 
-  def __init__(self):
-    Player.__init__(self, "Spiderman") # use __init__ method from Player
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Spiderman") # use __init__ method from Player
     self.moves["web shooter"] = self.web_shooter # add new move to dictionary
     self.moves["face punch"] = self.face_punch
     self.moves["flying kick"] = self.flying_kick
@@ -56,8 +56,8 @@ class Spiderman(Player): # create child class of Player
 class shobe(Player): # create child class of Player
   name = "shobe"
 
-  def __init__(self):
-    Player.__init__(self, "shobe")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "shobe")
     self.moves["cheese toss"] = self.cheese_toss
     self.moves["cheese wall"] = self.cheese_wall
     self.moves["cheesy onslaught"] = self.cheesy_onslaught
@@ -98,8 +98,8 @@ class shobe(Player): # create child class of Player
 #wyvern class
 class wyvern(Player):
   name = "wyvern"
-  def __init__(self):
-    Player.__init__(self, "wyvern")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "wyvern")
     self.moves["fire breath"] = self.fire_breath
     self.moves["claw swipe"] = self.claw_swipe
 
@@ -116,8 +116,8 @@ class wyvern(Player):
 #thanos class
 class Thanos(Player):
   name = "Thanos"
-  def __init__(self):
-    Player.__init__(self, "Thanos")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Thanos")
     self.moves["smash"] = self.smash
     self.moves["Thanos Snap"] = self.finger_snap
     self.moves["rewind"] = self.rewind
@@ -184,8 +184,8 @@ class Thanos(Player):
 class Pikachu(Player):
   name = "Pikachu"
 
-  def __init__(self):
-    Player.__init__(self, "Pikachu")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Pikachu")
     self.name = Pikachu.name
     self.moves["thunder shock"] = self.thunder_shock
     self.moves["tail slap"] = self.tail_slap
@@ -261,8 +261,8 @@ class Pikachu(Player):
 class Hercules(Player):
   name = "Hercules"
 
-  def __init__(self):
-    Player.__init__(self, "Hercules")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Hercules")
     self.moves["arrow shots"] = self.arrow_shots
     self.moves["club strike"] = self.club_strike
     self.moves["equalize healths"] = self.equalize_healths
@@ -288,8 +288,8 @@ class Hercules(Player):
 class Jedi(Player):
   name = "Jedi"
 
-  def __init__(self):
-    Player.__init__(self, "Jedi")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Jedi")
     self.moves.pop("attack") # makes it unusable
     self.moves["lightsaber slash"] = self.attack # rename basic attack move
     self.moves["force whirlwind"] = self.force_attack
@@ -321,8 +321,8 @@ class Jedi(Player):
 class winnerwannabe(Player):
   name = "winnerwannabe"
 
-  def __init__(self):
-    Player.__init__(self, "winnerwannabe")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "winnerwannabe")
     self.moves["bow shot"] = self.bow_shot
     self.moves["axe hit"] = self.axe_crit
     self.moves["god apple"] = self.god_apple
@@ -357,7 +357,7 @@ class winnerwannabe(Player):
               print_slowly("how much health would you like to have left?\n")
               howleft = float(input(">"))
               trueleft = float(self.health - howleft)
-              if trueleft > 0:
+              if howleft > 0:
                 self.health = howleft
                 self.energy += trueleft*self.energy*.005
                 break
@@ -468,11 +468,10 @@ class winnerwannabe(Player):
 
     
   def god_apple(self, enemy):
-    self.imortal = 0
-    self.defence += self.energy * 3
-    n = (10)
+    n = (15)
     n *= self.energy
-    if n >= 0:
+    if self.energy >= 0:
+      self.defence += 3 * self.energy
       self.health += n
       print_slowly(self.name+"ate a god apple. all stats increased.")
       time.sleep(1)
@@ -484,7 +483,6 @@ class winnerwannabe(Player):
       self.health += 0
 
   def armor_up(self, enemy):
-    self.imortal = 0
     f = (random.randint(10,20))
     f *= self.energy
     if f >= 0:
@@ -516,8 +514,8 @@ class winnerwannabe(Player):
 class Blue_Fire64(Player):
   name = "Blue_Fire64"
 
-  def __init__(self):
-    Player.__init__(self, "Blue_Fire64")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Blue_Fire64")
     self.moves["/kill"] = self.slash_kill
     self.moves["burn"] = self.burn
     self.moves["stab"] = self.stab
@@ -575,8 +573,8 @@ class Blue_Fire64(Player):
 class covid_vaccine(Player):
   name = "covid vaccine"
 
-  def __init__(self):
-    Player.__init__(self, "covid vaccine")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "covid vaccine")
     self.moves["antibodies"] = self.antibodies
     self.moves["pureify"] = self.pureify
     self.moves["imune system"] = self.imune_system
@@ -597,8 +595,8 @@ class covid_vaccine(Player):
 class Voldemort(Player):
   name = "Voldemort"
 
-  def __init__(self):
-    Player.__init__(self, "Voldemort")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Voldemort")
     self.moves.pop("attack")
     self.moves["crucio"] = self.attack
     self.moves["killing curse"] = self.avadakedavra
@@ -638,8 +636,8 @@ class Voldemort(Player):
 class Mewtwo(Player): 
   name = "Mewtwo"
 
-  def __init__(self):
-    Player.__init__(self, "Mewtwo")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Mewtwo")
     self.moves["Doom Desire"] = self.crush_grip
     self.moves["Spacial Rend"] = self.spacial_rend
     self.moves["Psycho Boost"] = self.psycho_boost
@@ -662,8 +660,8 @@ class Mewtwo(Player):
 class Medusa(Player): 
   name = "Medusa"
 
-  def __init__(self):
-    Player.__init__(self, "Medusa")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "Medusa")
     self.moves["claw slice"] = self.attack
     self.moves["stone gaze"] = self.stone_attack
     self.moves["snake bite"] = self.snake_bite
@@ -692,8 +690,8 @@ class Medusa(Player):
 #teacher class
 class teacher(Player): 
   name = "teacher"
-  def __init__(self):
-    Player.__init__(self, "teacher")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "teacher")
     self.moves["ruler smack"] = self.ruler_smack
     self.moves["apple"] = self.apple
     self.moves["pencil stab"] = self.pencil_stab
@@ -705,20 +703,20 @@ class teacher(Player):
     if random.random() <= 0.75:
       apple_health = random.randint(25,50)
       self.health += apple_health
-      print_slowly("healed {} more health.".format(apple_health))
+      print_slowly("healed {} more health.\n".format(apple_health))
       time.sleep(1)
     else:
       if random.random() <= 0.75:
-        print_slowly("it was rotten")
+        print_slowly("it was rotten\n")
         rotten_apple_health = random.randint(0,30)
         self.health += rotten_apple_health
-        print_slowly("healed {} more health.".format(rotten_apple_health))
+        print_slowly("healed {} more health.\n".format(rotten_apple_health))
         time.sleep(1)
       else:
-        print_slowly("it was rotten")
+        print_slowly("it was rotten\n")
         rotten_apple_health = random.randint(0,30)
         self.health -= rotten_apple_health
-        print_slowly("you took {} damage.".format(rotten_apple_health))
+        print_slowly("you took {} damage.\n".format(rotten_apple_health))
         time.sleep(1)
 
   def pencil_stab(self, enemy):
@@ -728,8 +726,8 @@ class teacher(Player):
 class dummy(Player): 
   name = "dummy"
 
-  def __init__(self):
-    Player.__init__(self, "dummy")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "dummy")
     self.moves.pop("attack")
     self.moves.pop("rest")
     self.moves.pop("heal")
@@ -751,8 +749,8 @@ class dummy(Player):
 class spinal_millipede(Player):
   name = "spinal millipede"
 
-  def __init__(self):
-    Player.__init__(self, "spinal millipede")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "spinal millipede")
     self.moves["steel skin"] = self.steel_skin
     self.moves["needle barrage"] = self.needle_barrage
 
@@ -766,8 +764,8 @@ class spinal_millipede(Player):
 class coral_guardian(Player):
   name = "coral guardian"
 
-  def __init__(self):
-    Player.__init__(self, "coral guardian")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "coral guardian")
     self.moves["ocean's light"] = self.ocean_light
     self.moves["protecter of the tomb"] = self.protec_the_tomb
 
@@ -782,8 +780,8 @@ class coral_guardian(Player):
 class covid19(Player):
   name = "covid-19"
 
-  def __init__(self):
-    Player.__init__(self, "covid-19")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "covid-19")
     self.moves["infect"] = self.infect
     self.moves["poison"] = self.poison
     self.moves["virus"] = self.virus
@@ -803,8 +801,8 @@ class covid19(Player):
 class firebeast(Player):
   name = "firebeast"
 
-  def __init__(self):
-    Player.__init__(self, "firebeast")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "firebeast")
     self.moves["fire beam"] = self.fire_beam
     self.moves["beast slash"] = self.beast_slash
     self.moves["spiritual flame"] = self.sacrid_flame
@@ -840,8 +838,8 @@ class firebeast(Player):
 class crawler(Player):
   name = "crawler"
 
-  def __init__(self):
-    Player.__init__(self, "crawler")
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "crawler")
     self.moves["blazeing rage"] = self.blazeing_rage
     self.moves["bloody onslaught"] = self.bloody_onslaught
 

@@ -52,8 +52,8 @@ def user_move(user, bot):
   print_slowly("choose a move:\n")
   
   for m in user.moves: # for each key in user.moves dictionary
-    print_quickly(m+"\n") # print key (name of move)
-    time.sleep(.25)
+    print(m) # print key (name of move)
+    time.sleep(.3)
   answer = input(">").lower()
   while answer not in user.moves: # repeats until user inputs valid move name
     invalad()
@@ -62,7 +62,6 @@ def user_move(user, bot):
     get_status(user,bot)
     for m in user.moves:
       print(m)
-      time.sleep(.25)
     answer = input(">").lower()
   print(user.name, ":",  answer)
   move = user.moves[answer] # looks up move in dictionary with key (name string)
@@ -76,7 +75,8 @@ def user_move(user, bot):
 # bot_move() function: makes bot randomly do one of its moves against user 
 # user and bot are both Player objects 
 
-def bot_move(user, bot): 
+def bot_move(bot, user): 
+  stay = 0
   bot.regen_health()
   bot.regen_energy()
   bot.poisoned(user)
@@ -100,7 +100,12 @@ def bot_move(user, bot):
   #we need the bot to remember
   #https://www.youtube.com/watch?v=dQw4w9WgXcQ OP CODE
   #probably use an if statement - winnerwannabe  
-  get_status(user, bot)
+  if stay == 0:
+    get_status(user, bot)
+    stay += 1
+  else:
+    stay = 0
+    get_status(bot,user)
   time.sleep(1)
   #the higher this number, the better
   moveeffectplayerhealth = userstarthealth - user.health #ur stupeed
