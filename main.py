@@ -14,7 +14,7 @@ loss = 0
 rounds = 0
 winstreak = 0
 
-class classChooser: # uppercase characters break when chosen by random
+class classChooser:
   heroes_map = {
     'spiderman' : Spiderman,
     'pikachu' : Pikachu,
@@ -49,14 +49,10 @@ class classChooser: # uppercase characters break when chosen by random
     self.charStr = None
 
     if 'v' == h_or_v:
-      class_list = classChooser.villains
       class_map = classChooser.villains_map
     if 'h' == h_or_v:
-      class_list = classChooser.heroes
       class_map = classChooser.heroes_map
-    if selectedClass.lower() not in [c.lower() for c in class_list]:
-      raise ReferenceError("[debug] failed to match charClass, %s, in this list: %s" % (selectedClass, class_list))
-      return(None)
+
     self.charClass = class_map[selectedClass]
     self.charStr = selectedClass
 
@@ -70,7 +66,7 @@ def player_chooser():
     print_quickly("Valid inputs are 'p' or 'b'")
     player_or_bot = input('>').lower()
 
-  print_slowly("do you want to be the hero or the villain? (type 'h' for hero, 'v' for villain, and 'r' for random.)\n")
+  print_slowly("do you want to be the hero or the villain? (type 'h' for hero, and 'v' for villain)\n")
   mode = input('>').lower()
   while mode != 'h' and mode != 'v' and mode != "r":
       print_slowly("invalid\n")
@@ -87,14 +83,7 @@ def player_chooser():
     userchars = classChooser.villains
     time.sleep(2)
     os.system('clear')
-  elif mode == "r": #user chose random
-    random_h_or_v = random.randint(1,2) #random choice between 1 and 2
-    if random_h_or_v == 1:
-      userchars = classChooser.heroes #if random_h_or_v is 1 you are a hero
-    if random_h_or_v == 2:
-      userchars = classChooser.villains #if random_h_or_v is 1 you are a hero
-    time.sleep(2)
-    os.system('clear')
+
 
   print()
   time.sleep(1)
