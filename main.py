@@ -13,6 +13,7 @@ win = 0
 loss = 0
 rounds = 0
 winstreak = 0
+randomchoice = random.randint(1,2)
 
 class classChooser:
   heroes_map = {
@@ -52,6 +53,11 @@ class classChooser:
       class_map = classChooser.villains_map
     if 'h' == h_or_v:
       class_map = classChooser.heroes_map
+    if 'r' == h_or_v:
+      if randomchoice == 1:
+        class_map = classChooser.heroes_map
+      elif randomchoice == 2:
+        class_map = classChooser.villains_map
 
     self.charClass = class_map[selectedClass]
     self.charStr = selectedClass
@@ -83,6 +89,21 @@ def player_chooser():
     userchars = classChooser.villains
     time.sleep(2)
     os.system('clear')
+  elif mode == "r": #user chose random
+    if randomchoice == 1: #if a random is equal to 1 it chooses hero
+      userchars = classChooser.heroes
+      time.sleep(2)
+      print_slowly("you are...\n")
+      time.sleep(2)
+      os.system("clear")
+      print_slowly("a hero!")
+    if randomchoice == 2: #if a random is equal to 2 it chooses villain
+      userchars = classChooser.villains
+      time.sleep(2)
+      print_slowly("you are...\n")
+      time.sleep(2)
+      os.system("clear")
+      print_slowly("a villain!")
 
 
   print()
