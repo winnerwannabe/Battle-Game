@@ -72,7 +72,7 @@ def player_chooser():
     print_quickly("Valid inputs are 'p' or 'b'")
     player_or_bot = input('>').lower()
 
-  print_slowly("do you want to be the hero or the villain? (type 'h' for hero, and 'v' for villain)\n")
+  print_slowly("do you want to be the hero or the villain? (type 'h' for hero, 'v' for villain, and 'r'for random)\n")
   mode = input('>').lower()
   while mode != 'h' and mode != 'v' and mode != "r":
       print_slowly("invalid\n")
