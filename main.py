@@ -152,7 +152,7 @@ def consider_result(user, bot):
   if user.health <= 0:
     print_slowly("{} has no more health...\n".format(user))
     time.sleep(1)
-    print_slowly("%s loses, %s wins!\n" % user, bot)
+    print_slowly(str(user)+" loses "+str(bot)+" wins!\n")
     loss += 1
     winstreak = 0
     return(False)
@@ -160,7 +160,7 @@ def consider_result(user, bot):
   elif bot.health <= 0:
     print_slowly("{} has no more health...\n".format(bot))
     time.sleep(1)
-    print_slowly("%s loses %s wins!\n" % bot,user)
+    print_slowly(str(bot)+" loses "+str(user)+" wins!\n")
     win += 1
     winstreak += 1
     return(False)

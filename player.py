@@ -62,8 +62,11 @@ class Player:
     damage *= self.energy# multiplies damage by energy level
     damage -= enemy.defence#should make damage damage - defence
     if enemy.imortal >= 1: # if enemy.imortal is greater than or equal to 1:
-      damage = 0 # damage is 0
-      print_slowly("blocked! " + self.name + " did 0 damage to " + enemy.name + "\n") # says that the attack did nothing
+      if self.energy >= .75:
+        damage = 0 # damage is 0
+        print_slowly("blocked! " + self.name + " did 0 damage to " + enemy.name + "\n")  # says that the attack did nothing
+      else:
+        pass
       time.sleep(2)
     else:
       if damage <= 0: #if damgage is less than or equal to 0
