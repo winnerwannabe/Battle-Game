@@ -11,7 +11,7 @@ from helper import print_slowly
 ##############################################
 
 #character ideas:
-#
+#piece maker/hero/
 
 
 # Spiderman class
@@ -102,6 +102,8 @@ class wyvern(Player):
     Player.__init__(self, player_or_bot, "wyvern")
     self.moves["fire breath"] = self.fire_breath
     self.moves["claw swipe"] = self.claw_swipe
+    self.defence = 10
+    self.health = 110
 
   def __str__(self): # returns a string when the object is called in a string context
       return(wyvern.name)
@@ -326,7 +328,7 @@ class winnerwannabe(Player):
     self.moves["bow shot"] = self.bow_shot
     self.moves["axe hit"] = self.axe_crit
     self.moves["god apple"] = self.god_apple
-    self.moves["armor up"] = self.armor_up
+    self.moves["enchant armor"] = self.enchant_armor
     self.moves["/kill"] = self.slash_kill
     self.moves["potion of weakness"] = self.potion_of_weakness
     self.moves["shield"] = self.shield
@@ -482,7 +484,7 @@ class winnerwannabe(Player):
     else:
       self.health += 0
 
-  def armor_up(self, enemy):
+  def enchant_armor(self, enemy):
     f = (random.randint(10,20))
     f *= self.energy
     if f >= 0:
@@ -490,6 +492,15 @@ class winnerwannabe(Player):
     else:
       self.defence += 0
     print_slowly('defence went up by %.2f' % (f))
+    thorn_type = random.randint(1,4)
+    if thorn_type == 1:
+      self.thorn += .025
+    elif thorn_type == 2:
+      self.poison_thorn += .5
+    elif thorn_type == 3:
+      self.energy_thorn += .01
+    elif thorn_type == 4:
+      self.energy_losses_thorns += .5
     time.sleep(1)
 
   def slash_kill(self,enemy):
@@ -523,6 +534,26 @@ class Blue_Fire64(Player):
     self.moves["god apple"] = self.god_apple
     self.moves["armor break"] = self.armor_break
     self.moves["shield"] = self.shield
+    self.moves["enchant armor"] = self.enchant_armor
+
+  def enchant_armor(self, enemy):
+    f = (random.randint(10,20))
+    f *= self.energy
+    if f >= 0:
+      self.defence += f # makes defence go up by f
+    else:
+      self.defence += 0
+    print_slowly('defence went up by %.2f' % (f))
+    thorn_type = random.randint(1,4)
+    if thorn_type == 1:
+      self.thorn += .025
+    elif thorn_type == 2:
+      self.poison_thorn += .5
+    elif thorn_type == 3:
+      self.energy_thorn += .01
+    elif thorn_type == 4:
+      self.energy_losses_thorns += .5
+    time.sleep(1)
 
   def shield(self,enemy):
     self.imortal = 1
@@ -665,6 +696,10 @@ class Medusa(Player):
     self.moves["claw slice"] = self.attack
     self.moves["stone gaze"] = self.stone_attack
     self.moves["snake bite"] = self.snake_bite
+    self.thorn = .1
+    self.energy_thorn = .01
+    self.poison_thorn = .5
+    self.energy_losses_thorns = .5
 
   def stone_attack(self, enemy):
     print_slowly("DUCK!")
@@ -753,6 +788,7 @@ class spinal_millipede(Player):
     Player.__init__(self, player_or_bot, "spinal millipede")
     self.moves["steel skin"] = self.steel_skin
     self.moves["needle barrage"] = self.needle_barrage
+    self.defence = 20
 
   def steel_skin (self,enemy):
     self.defence += random.randint(5,30) * self.energy
@@ -833,7 +869,6 @@ class firebeast(Player):
     self.attack(enemy, random.randint(20,40))
     enemy.energy -= .05
 
-#crawler/villan blazing rage/boosts extra energy,bloody onslaught/ does 50 dmg
 #crawler class
 class crawler(Player):
   name = "crawler"
@@ -848,3 +883,33 @@ class crawler(Player):
 
   def blazeing_rage(self,enemy):
     self.energy += .075 * self.energy
+
+#withered stone class
+class withered_stone(Player):
+  name = "withered stone"
+
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "withered stone")
+    self.defence = 5
+    self.moves["pound"] = self.pound
+    self.moves["absorb"] = self.absorb
+  
+  def pound(self,enemy):
+    self.attack(enemy,20)
+  
+  def absorb(self,enemy):
+    if self.energy > 0:
+      self.energy += .2*self.energy
+    else:
+      self.energy += .01
+
+#moss growth class
+class moss_growth(Player):
+  name = "moss growth"
+
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "moss growth")
+    self.moves["air slash"] = self.air_slash
+
+  def air_slash(self,enemy):
+    self.attack(enemy,45)

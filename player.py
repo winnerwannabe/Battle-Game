@@ -19,7 +19,7 @@ class Player:
     self.moves = {}# create dictionary of moves
     self.imortal = 0 #if more than 1, imortal
     self.regen_health_value = 0#regeneration for health
-    self.health_regened_per_round = 15
+    self.health_regened_per_round = 15 #how much health regened per round
     self.regen_energy_value = 0#line above but for energy
     self.poisoned_value = 0#line above but for damage
     self.dpr = 15 #how much damage poisoned does
@@ -29,6 +29,10 @@ class Player:
     self.even_out = 0 #makes it so that rounds work
     self.if_armor_loss = 0 #poisoned but for defence
     self.roal = 1 #dpr but for defence
+    self.thorn = 0 #when attacked attacks equal to damage taken * thorn
+    self.poison_thorn = 0 #poisons enemy when attacked
+    self.energy_thorn = 0 #drains energy when attacked
+    self.energy_losses_thorns = 0 #poison thorn but for energy
 
     # moves property is a dictionary - used to look up a Player's moves    
     # key = string (name of move), value = method (function for move)  
@@ -75,6 +79,10 @@ class Player:
       else: # damage is not less than or equal to 0
         enemy.health -= damage #subtracts damage from enemy's health
         print_slowly(str(self.name+" did "+"%.2f"%damage+" damage to "+enemy.name + "\n"))
+        self.health -= damage * enemy.thorn
+        self.poisoned_value += enemy.poison_thorn
+        self.energy_losses += enemy.energy_losses_thorns
+        self.energy -= enemy.energy_thorn
         time.sleep(2)
 
   # heal() method: move that increases a Player's own health (by random amount)  

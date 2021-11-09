@@ -1,6 +1,7 @@
 #!/bin/python3
 #this works fix
 #? - winnerwannabe
+#if you miss spell your character you crash
 import random, time, os
 from time import sleep
 from player import *
@@ -40,7 +41,9 @@ class classChooser:
     'wyvern' : wyvern,
     'covid-19' : covid19,
     'firebeast' : firebeast,
-    'crawler' : crawler
+    'crawler' : crawler,
+    'withered stone' : withered_stone,
+    'moss growth' : moss_growth
   }
   villains = [c.name for c in villains_map.values()]
 
@@ -69,7 +72,7 @@ def player_chooser():
   player_or_bot = input('>').lower()
   while player_or_bot != 'p' and player_or_bot != 'b':
     invalad()
-    print_quickly("Valid inputs are 'p' or 'b'")
+    print_quickly("Valid inputs are 'p' or 'b'\n")
     player_or_bot = input('>').lower()
 
   print_slowly("do you want to be the hero or the villain? (type 'h' for hero, 'v' for villain, and 'r'for random)\n")
@@ -161,15 +164,12 @@ def consider_result(user, bot):
     print_slowly("{} has no more health...\n".format(bot))
     time.sleep(1)
     print_slowly(str(bot)+" loses "+str(user)+" wins!\n")
-    win += 1
-    winstreak += 1
     return(False)
 
   elif bot.health <= 0 and user.health <= 0:
     print_slowly("no one has any health...\n")
     time.sleep(1)
     print_slowly("how???\n")
-    winstreak = 0
     return(False)
   
   return(True)
@@ -181,6 +181,7 @@ if __name__=="__main__":
 
   while True:
     player1 = player_chooser()
+    os.system("clear")
     player2 = player_chooser()
     print_slowly("the enemy {} will be fighting against is...\n".format(player1))  
     time.sleep(1)
@@ -211,7 +212,7 @@ if __name__=="__main__":
     time.sleep(1)
     print("_"*115)
     time.sleep(1)
-    print_slowly("wins: " + str(win) + " losses: " + str(loss) + " winstreak: " + str(winstreak) + "\n")
+    print_slowly("player1 wins: " + str(win) + " player2 wins: " + str(loss) + "\n")
     print_slowly("want to play another round? y/n\n")
     time.sleep(1)
     new_round = input(">").lower()
