@@ -6,14 +6,9 @@ import random, time, os
 from time import sleep
 from player import *
 from special import *
-from special import Blue_Fire64 as Blue_Fire64
-from special import Hercules as Hercules
 from helper import *
 from helper import print_slowly, print_quickly, invalad
-win = 0
-loss = 0
-rounds = 0
-winstreak = 0
+win, loss, rounds, winstreak = 0, 0, 0, 0
 randomchoice = random.randint(1,2)
 
 class classChooser:
@@ -108,13 +103,12 @@ def player_chooser():
       os.system("clear")
       print_slowly("a villain!")
 
-
   print()
   time.sleep(1)
   print_slowly("Do you want to choose your character or do you want it to be random? (Type 'c' for choose and 'r' for random.)\n")
   answer = input(">").lower()
   while answer != 'c' and answer != 'r':
-      print_slowly("invalid\n")
+      invalad()
       answer = input(">").lower()
   time.sleep(2)
 
@@ -131,7 +125,7 @@ def player_chooser():
     userClass = None ;
     userClass = classChooser(mode, input(">").lower())
 
-    while not userClass.charClass:
+    while not userClass.charClass: #skiping this for some reason
       invalad()
       userClass = classChooser(mode, input(">").lower())
 

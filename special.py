@@ -77,7 +77,7 @@ class shobe(Player): # create child class of Player
     n *= self.energy # multiplied by energy level
     if n >= 0:
       self.defence += n 
-      print_slowly(self.name+" gained "+str(n)+" defence")
+      print_slowly(self.name+" gained "+"%.2f" %n+" defence")
       time.sleep(1)
     else:
       self.defence += 0
@@ -87,7 +87,7 @@ class shobe(Player): # create child class of Player
     v *= self.energy # multiplied by energy level
     if v >= 0:
       self.health += v 
-      print_slowly(self.name+" gained "+str(v)+" health")
+      print_slowly(self.name+" gained "+"%.2f" %v+" health")
       time.sleep(1)
     else:
       self.health += 0
@@ -485,22 +485,29 @@ class winnerwannabe(Player):
       self.health += 0
 
   def enchant_armor(self, enemy):
+    multi = 1
     f = (random.randint(10,20))
     f *= self.energy
+    if self.defence >= 100:
+      multi = .5
     if f >= 0:
-      self.defence += f # makes defence go up by f
+      self.defence += f*multi # makes defence go up by f
     else:
       self.defence += 0
     print_slowly('defence went up by %.2f' % (f))
     thorn_type = random.randint(1,4)
     if thorn_type == 1:
-      self.thorn += .025
+      self.thorn += .025*self.energy/multi
+      print("you have upgraded thorns now!")
     elif thorn_type == 2:
-      self.poison_thorn += .5
+      self.poison_thorn += .5*self.energy/multi
+      print("you have upgraded poison thorns now!")
     elif thorn_type == 3:
-      self.energy_thorn += .01
+      self.energy_thorn += .01*self.energy/multi
+      print("you have upgraded energy thorns now!")
     elif thorn_type == 4:
-      self.energy_losses_thorns += .5
+      self.energy_losses_thorns += .5*self.energy/multi
+      print("you have upgraded energy poison thorns now!")
     time.sleep(1)
 
   def slash_kill(self,enemy):
@@ -537,22 +544,25 @@ class Blue_Fire64(Player):
     self.moves["enchant armor"] = self.enchant_armor
 
   def enchant_armor(self, enemy):
+    multi = 1
     f = (random.randint(10,20))
     f *= self.energy
+    if self.defence >= 100:
+      multi = .5
     if f >= 0:
-      self.defence += f # makes defence go up by f
+      self.defence += f*multi # makes defence go up by f
     else:
       self.defence += 0
     print_slowly('defence went up by %.2f' % (f))
     thorn_type = random.randint(1,4)
     if thorn_type == 1:
-      self.thorn += .025
+      self.thorn += .025*self.energy/multi
     elif thorn_type == 2:
-      self.poison_thorn += .5
+      self.poison_thorn += .5*self.energy/multi
     elif thorn_type == 3:
-      self.energy_thorn += .01
+      self.energy_thorn += .01*self.energy/multi
     elif thorn_type == 4:
-      self.energy_losses_thorns += .5
+      self.energy_losses_thorns += .5*self.energy/multi
     time.sleep(1)
 
   def shield(self,enemy):

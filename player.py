@@ -64,6 +64,10 @@ class Player:
     if damage == -1:# if there is no 2nd argument 
       damage = random.randint(20, 40)# random number for damage
     damage *= self.energy# multiplies damage by energy level
+    self.health -= damage * enemy.thorn * enemy.energy
+    self.poisoned_value += enemy.poison_thorn * enemy.energy
+    self.energy_losses += enemy.energy_losses_thorns * enemy.energy
+    self.energy -= enemy.energy_thorn * enemy.energy
     damage -= enemy.defence#should make damage damage - defence
     if enemy.imortal >= 1: # if enemy.imortal is greater than or equal to 1:
       if self.energy >= .75:
@@ -79,10 +83,6 @@ class Player:
       else: # damage is not less than or equal to 0
         enemy.health -= damage #subtracts damage from enemy's health
         print_slowly(str(self.name+" did "+"%.2f"%damage+" damage to "+enemy.name + "\n"))
-        self.health -= damage * enemy.thorn
-        self.poisoned_value += enemy.poison_thorn
-        self.energy_losses += enemy.energy_losses_thorns
-        self.energy -= enemy.energy_thorn
         time.sleep(2)
 
   # heal() method: move that increases a Player's own health (by random amount)  
