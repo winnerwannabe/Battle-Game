@@ -170,10 +170,11 @@ class Thanos(Player):
           print_slowly(enemy.name+" resisted!")
           time.sleep(1)
         else:
-          enemy.health = 100
-          enemy.defence = 0
-          enemy.energy = 1
-          enemy.imortal = 0
+          if enemy.defence >= self.defence *2.5:
+            enemy.health = 100
+            enemy.defence = 0
+            enemy.energy = 1
+            enemy.imortal = 0
       else:
         print_slowly("you are not strong enough right now")
         time.sleep(1)
@@ -336,6 +337,10 @@ class winnerwannabe(Player):
     self.moves["sacrifice"] = self.sacrifice
     self.moves["potion of poison"] = self.potion_of_poison
     self.moves["corode"] = self.corode
+    self.thorn_level = 0
+    self.poison_thorn_level = 0
+    self.energy_thorn_level = 0
+    self.energy_poison_thorn_level = 0
 
   def corode(self,enemy):
     enemy.roal += 5 * self.energy
@@ -498,17 +503,21 @@ class winnerwannabe(Player):
     thorn_type = random.randint(1,4)
     if thorn_type == 1:
       self.thorn += .025*self.energy/multi
-      print("you have upgraded thorns now!")
+      self.thorn_level += 1
+      print_slowly("\nyou have "+str(self.thorn_level)+" levels in thorns now!")
     elif thorn_type == 2:
       self.poison_thorn += .5*self.energy/multi
-      print("you have upgraded poison thorns now!")
+      self.poison_thorn_level += 1
+      print_slowly("\nyou have "+str(self.poison_thorn_level)+" levels in poison thorns now!")
     elif thorn_type == 3:
       self.energy_thorn += .01*self.energy/multi
-      print("you have upgraded energy thorns now!")
+      self.energy_thorn_level += 1
+      print_slowly("\nyou have "+str(self.energy_thorn_level)+" levels in energy thorns now!")
     elif thorn_type == 4:
       self.energy_losses_thorns += .5*self.energy/multi
-      print("you have upgraded energy poison thorns now!")
-    time.sleep(1)
+      self.energy_poison_thorn_level += 1
+      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" levels in energy poison thorns now!")
+    time.sleep(2)
 
   def slash_kill(self,enemy):
     self.health = 0
@@ -542,6 +551,10 @@ class Blue_Fire64(Player):
     self.moves["armor break"] = self.armor_break
     self.moves["shield"] = self.shield
     self.moves["enchant armor"] = self.enchant_armor
+    self.thorn_level = 0
+    self.poison_thorn_level = 0
+    self.energy_thorn_level = 0
+    self.energy_poison_thorn_level = 0
 
   def enchant_armor(self, enemy):
     multi = 1
@@ -557,13 +570,21 @@ class Blue_Fire64(Player):
     thorn_type = random.randint(1,4)
     if thorn_type == 1:
       self.thorn += .025*self.energy/multi
+      self.thorn_level += 1
+      print_slowly("\nyou have "+str(self.thorn_level)+" levels in thorns now!")
     elif thorn_type == 2:
       self.poison_thorn += .5*self.energy/multi
+      self.poison_thorn_level += 1
+      print_slowly("\nyou have "+str(self.poison_thorn_level)+" levels in poison thorns now!")
     elif thorn_type == 3:
       self.energy_thorn += .01*self.energy/multi
+      self.energy_thorn_level += 1
+      print_slowly("\nyou have "+str(self.energy_thorn_level)+" levels in energy thorns now!")
     elif thorn_type == 4:
       self.energy_losses_thorns += .5*self.energy/multi
-    time.sleep(1)
+      self.energy_poison_thorn_level += 1
+      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" levels in energy poison thorns now!")
+    time.sleep(2)
 
   def shield(self,enemy):
     self.imortal = 1
