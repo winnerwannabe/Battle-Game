@@ -24,12 +24,16 @@ class Spiderman(Player): # create child class of Player
     self.moves["face punch"] = self.face_punch
     self.moves["flying kick"] = self.flying_kick
     self.moves["think"] = self.think
+    self.special_move = 4
 
   def __str__(self): # returns a string when the object is called in a string context
       return(Spiderman.name)
 
   def web_shooter(self, enemy): # defines special move for child class
     self.attack(enemy, random.randint(40, 50)) #calls player's attack move and gives it a new damage number
+    self.special_move -= 1
+    if self.special_move <= 0:
+      self.moves.pop("web shooter")
   
   def face_punch(self, enemy):
     damage = random.randint(30, 45) #you can doit this way too
@@ -150,8 +154,7 @@ class Thanos(Player):
       self.attack(self, 50)   
 
   def rewind(self, enemy):
-    self.imortal = 0
-    if self.energy >= 0.9:
+    if self.energy >= 0.5:
       if self.health <= 100:
         self.health = 100
       else:
@@ -164,9 +167,8 @@ class Thanos(Player):
         self.energy = 1
       else:
         self.energy = self.energy 
-      self.imortal = 0
       if enemy.defence <= self.defence * 1.5:
-        if random.random() <= 0.25:
+        if random.random() <= 0.5:
           print_slowly(enemy.name+" resisted!")
           time.sleep(1)
         else:
@@ -198,7 +200,7 @@ class Pikachu(Player):
 
 # special move:
   def thunder_shock(self, enemy):
-    self.imortal = 0
+    
     damage = random.randint(40, 50)
     self.attack(enemy, damage)
     if random.random() <= 0.5: # 50% chance of lowering own health
@@ -206,7 +208,6 @@ class Pikachu(Player):
   
   def tail_slap(self, enemy):
     self.attack(enemy, 35)
-    self.imortal = 0
   
   def pika_block(self, enemy):
     self.imortal = 1
@@ -232,14 +233,12 @@ class Pikachu(Player):
   
   def thunder_punch(self, enemy):
     self.attack(enemy, random.randint(45, 55))
-    self.imortal = 0
   
   def wild_charge(self, enemy):
     self.defence -= 2
-    self.attack(enemy, random.randint(40, 50))
+    self.attack(enemy, random.randint(50, 60))
     if random.random() >= .5:
       self.attack(self,random.randint(10,25))
-    self.imortal = 0
   
   def raichu_block(self, enemy):
     self.imortal = 1
@@ -272,7 +271,7 @@ class Hercules(Player):
 
   def arrow_shots(self, enemy):
     if random.random() <= 0.25:
-      self.attack(enemy, random.randint(40, 45))
+      self.attack(enemy, random.randint(50, 65))
     else:
       print_slowly("Hercules missed!")
   
@@ -343,15 +342,14 @@ class winnerwannabe(Player):
     self.energy_poison_thorn_level = 0
 
   def corode(self,enemy):
-    enemy.roal += 5 * self.energy
-    enemy.if_armor_loss += 1 * self.energy
+    enemy.alpr += 5 * self.energy
+    enemy.rounds_of_armor_loss += 2 * self.energy
 
   def potion_of_poison(self,enemy):
     enemy.dpr += 5 * self.energy
     enemy.poisoned_value += random.randint(4,6) * self.energy
 
   def sacrifice(self,enemy):
-    self.imortal = 0
     while True:
       print_slowly("do you want to sacrifice health and gain energy (1) or sacrifice energy and gain health (2)\n")
       health_or_energy = input(">")
@@ -443,13 +441,11 @@ class winnerwannabe(Player):
     enemy.energy -= n * .005
     if enemy.defence > 0:
       enemy.defence -= 1
-    self.imortal = 0
 
   def shield(self,enemy):
     self.imortal = 1
 
   def bow_shot(self, enemy):
-    self.imortal = 0
     if random.random() <= 0.75:
       self.attack(enemy, random.randint(20,70))
     else:
@@ -465,14 +461,12 @@ class winnerwannabe(Player):
         enemy.defence = 0
       if enemy.imortal > 0:
         enemy.imortal = 0
-        enemy.defence = 0
     else:
       self.attack(enemy,25)
       if enemy.defence >= self.energy:
         enemy.defence -= self.energy
       else:
         enemy.defence = 0
-
     
   def god_apple(self, enemy):
     n = (15)
@@ -491,6 +485,7 @@ class winnerwannabe(Player):
 
   def enchant_armor(self, enemy):
     multi = 1
+    s = ""
     f = (random.randint(10,20))
     f *= self.energy
     if self.defence >= 100:
@@ -499,24 +494,26 @@ class winnerwannabe(Player):
       self.defence += f*multi # makes defence go up by f
     else:
       self.defence += 0
+    if self.defence >= 100:
+      s = "s"
     print_slowly('defence went up by %.2f' % (f))
     thorn_type = random.randint(1,4)
     if thorn_type == 1:
       self.thorn += .025*self.energy/multi
-      self.thorn_level += 1
-      print_slowly("\nyou have "+str(self.thorn_level)+" levels in thorns now!")
+      self.thorn_level += 1 / multi
+      print_slowly("\nyou have "+str(self.thorn_level)+" level"+s+" in thorns now!")
     elif thorn_type == 2:
       self.poison_thorn += .5*self.energy/multi
-      self.poison_thorn_level += 1
-      print_slowly("\nyou have "+str(self.poison_thorn_level)+" levels in poison thorns now!")
+      self.poison_thorn_level += 1 / multi
+      print_slowly("\nyou have "+str(self.poison_thorn_level)+" level"+s+" in poison thorns now!")
     elif thorn_type == 3:
       self.energy_thorn += .01*self.energy/multi
-      self.energy_thorn_level += 1
-      print_slowly("\nyou have "+str(self.energy_thorn_level)+" levels in energy thorns now!")
+      self.energy_thorn_level += 1 / multi
+      print_slowly("\nyou have "+str(self.energy_thorn_level)+" level"+s+" in energy thorns now!")
     elif thorn_type == 4:
       self.energy_losses_thorns += .5*self.energy/multi
-      self.energy_poison_thorn_level += 1
-      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" levels in energy poison thorns now!")
+      self.energy_poison_thorn_level += 1 / multi
+      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" level"+s+" in energy poison thorns now!")
     time.sleep(2)
 
   def slash_kill(self,enemy):
@@ -528,14 +525,13 @@ class winnerwannabe(Player):
   def potion_of_weakness(self,enemy):
     enemy.energy -= self.energy * .2
     enemy.elpr += .005 * self.energy 
-    enemy.roal += 2 * self.energy
-    enemy.if_armor_loss += 2 * self.energy
+    enemy.alpr += 2 * self.energy
+    enemy.rounds_of_armor_loss += 2 * self.energy
     enemy.energy_losses += 4 * self.energy
     if enemy.defence >= 1 * self.energy:
       enemy.defence -= 1 * self.energy
     else:
       enemy.defence = 0
-    self.imortal = 0
 
 # Blue_Fire64 class
 class Blue_Fire64(Player):
@@ -551,13 +547,19 @@ class Blue_Fire64(Player):
     self.moves["armor break"] = self.armor_break
     self.moves["shield"] = self.shield
     self.moves["enchant armor"] = self.enchant_armor
+    self.moves["accelerate regeneraton"] = self.accelerate_regeneration
     self.thorn_level = 0
     self.poison_thorn_level = 0
     self.energy_thorn_level = 0
     self.energy_poison_thorn_level = 0
 
+  def accelerate_regeneration(self,enemy):
+    self.rohg += .2 * self.energy
+    self.roeg += .2 * self.energy
+
   def enchant_armor(self, enemy):
     multi = 1
+    s = ""
     f = (random.randint(10,20))
     f *= self.energy
     if self.defence >= 100:
@@ -566,24 +568,26 @@ class Blue_Fire64(Player):
       self.defence += f*multi # makes defence go up by f
     else:
       self.defence += 0
+    if self.defence >= 100:
+      s = "s"
     print_slowly('defence went up by %.2f' % (f))
     thorn_type = random.randint(1,4)
     if thorn_type == 1:
       self.thorn += .025*self.energy/multi
-      self.thorn_level += 1
-      print_slowly("\nyou have "+str(self.thorn_level)+" levels in thorns now!")
+      self.thorn_level += 1 / multi
+      print_slowly("\nyou have "+str(self.thorn_level)+" level"+s+" in thorns now!")
     elif thorn_type == 2:
       self.poison_thorn += .5*self.energy/multi
-      self.poison_thorn_level += 1
-      print_slowly("\nyou have "+str(self.poison_thorn_level)+" levels in poison thorns now!")
+      self.poison_thorn_level += 1 / multi
+      print_slowly("\nyou have "+str(self.poison_thorn_level)+" level"+s+" in poison thorns now!")
     elif thorn_type == 3:
       self.energy_thorn += .01*self.energy/multi
-      self.energy_thorn_level += 1
-      print_slowly("\nyou have "+str(self.energy_thorn_level)+" levels in energy thorns now!")
+      self.energy_thorn_level += 1 / multi
+      print_slowly("\nyou have "+str(self.energy_thorn_level)+" level"+s+" in energy thorns now!")
     elif thorn_type == 4:
       self.energy_losses_thorns += .5*self.energy/multi
-      self.energy_poison_thorn_level += 1
-      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" levels in energy poison thorns now!")
+      self.energy_poison_thorn_level += 1 / multi
+      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" level"+s+" in energy poison thorns now!")
     time.sleep(2)
 
   def shield(self,enemy):
@@ -612,7 +616,7 @@ class Blue_Fire64(Player):
     print_slowly('defence went up by %s' % (f))
 
   def god_apple(self, enemy):
-    self.imortal = 0
+    
     self.defence += self.energy * 3
     n = (10)
     n *= self.energy
@@ -623,6 +627,7 @@ class Blue_Fire64(Player):
     self.regen_health_value += 4
   
   def armor_break(self,enemy):
+    enemy.imortal = 0
     self.attack(enemy,10)
     if enemy.defence <= 50:
       enemy.defence = 0
@@ -630,6 +635,22 @@ class Blue_Fire64(Player):
     else:
       enemy.defence -= 50
       print_slowly(enemy.name+"'s defence is now "+enemy.defence)
+
+#coral guardian class
+class coral_guardian(Player):
+  name = "coral guardian"
+
+  def __init__(self, player_or_bot):
+    Player.__init__(self, player_or_bot, "coral guardian")
+    self.moves["ocean's light"] = self.ocean_light
+    self.moves["protecter of the tomb"] = self.protec_the_tomb
+
+  def protec_the_tomb (self,enemy):
+    self.attack(enemy, random.randint(25,45))
+
+  def ocean_light (self,enemy):
+    self.energy += 0.05 * self.energy
+    self.defence += random.randint(5,20) * self.energy
   
 #covid_vacine class
 class covid_vaccine(Player):
@@ -649,6 +670,7 @@ class covid_vaccine(Player):
     self.health += 25 * self.energy
     self.poisoned_value = 0
     self.energy_losses = 0
+    self.rounds_of_armor_loss = 0
 
   def antibodies(self,enemy):
     self.attack(enemy, random.randint(20,50))
@@ -667,7 +689,8 @@ class Voldemort(Player):
     self.specialmove = 7
 
   def regeneration(self,enemy):
-    self.regen_health_value += 6
+    self.regen_health_value += 6 * self.energy
+    self.health_regened_per_round += 5
 
   def avadakedavra(self, enemy):
     print_slowly("AVADA KEDAVRA!")
@@ -700,9 +723,9 @@ class Mewtwo(Player):
 
   def __init__(self, player_or_bot):
     Player.__init__(self, player_or_bot, "Mewtwo")
-    self.moves["Doom Desire"] = self.crush_grip
-    self.moves["Spacial Rend"] = self.spacial_rend
-    self.moves["Psycho Boost"] = self.psycho_boost
+    self.moves["doom desire"] = self.crush_grip
+    self.moves["spacial rend"] = self.spacial_rend
+    self.moves["psycho boost"] = self.psycho_boost
 
   def spacial_rend(self, enemy):
     damage = random.randint(50, 70)
@@ -826,22 +849,6 @@ class spinal_millipede(Player):
 
   def needle_barrage (self,enemy):
     self.attack(enemy, random.randint(25,45))
-
-#coral guardian class
-class coral_guardian(Player):
-  name = "coral guardian"
-
-  def __init__(self, player_or_bot):
-    Player.__init__(self, player_or_bot, "coral guardian")
-    self.moves["ocean's light"] = self.ocean_light
-    self.moves["protecter of the tomb"] = self.protec_the_tomb
-
-  def protec_the_tomb (self,enemy):
-    self.attack(enemy, random.randint(25,45))
-
-  def ocean_light (self,enemy):
-    self.energy += 0.05 * self.energy
-    self.defence += random.randint(5,20) * self.energy
 
 #covid-19 class
 class covid19(Player):

@@ -27,12 +27,14 @@ class Player:
     self.elpr = .005 #dpr but for energy_losses
     self.rounds = 1 #what round it is
     self.even_out = 0 #makes it so that rounds work
-    self.if_armor_loss = 0 #poisoned but for defence
-    self.roal = 1 #dpr but for defence
+    self.rounds_of_armor_loss = 0 #poisoned value but for defence
+    self.alpr = 1 #dpr but for defence
     self.thorn = 0 #when attacked attacks equal to damage taken * thorn
     self.poison_thorn = 0 #poisons enemy when attacked
     self.energy_thorn = 0 #drains energy when attacked
     self.energy_losses_thorns = 0 #poison thorn but for energy
+    self.rohg = .2 #stands for rate of health gained. pretty self explanitory
+    self.roeg = .2 #rohg but replace health with energy.
 
     # moves property is a dictionary - used to look up a Player's moves    
     # key = string (name of move), value = method (function for move)  
@@ -72,7 +74,8 @@ class Player:
     if enemy.imortal >= 1: # if enemy.imortal is greater than or equal to 1:
       if self.energy >= .75:
         damage = 0 # damage is 0
-        print_slowly("blocked! " + self.name + " did 0 damage to " + enemy.name + "\n")  # says that the attack did nothing
+        print_slowly("blocked! " + self.name + " did 0 damage to " + enemy.name + "\n")# says that the attack did nothing
+        enemy.imortal -= 1
       else:
         pass
       time.sleep(2)
@@ -136,7 +139,7 @@ class Player:
         self.health += 5
       self.regen_health_value -= 1
     else:
-      self.regen_health_value += .2
+      self.regen_health_value += self.rohg * self.energy
 
   def regen_energy(self):
     if self.regen_energy_value >= 1:
@@ -147,7 +150,7 @@ class Player:
         self.energy += self.epr
       self.regen_energy_value -= 1
     else:
-      self.regen_energy_value += .2
+      self.regen_energy_value += self.roeg * self.energy
 
   def poisoned(self,enemy):
     if self.poisoned_value >= 1:
@@ -164,9 +167,9 @@ class Player:
       self.energy_losses += 0
 
   def armor_loss(self,enemy):
-    if self.if_armor_loss >= 1 and self.defence > 0:
-      if self.defence >= enemy.energy * self.roal:
-        self.defence -= self.roal * self.energy
+    if self.rounds_of_armor_loss >= 1 and self.defence > 0:
+      if self.defence >= enemy.energy * self.alpr:
+        self.defence -= self.alpr * self.energy
       else:
         self.defence = 0
     else:
