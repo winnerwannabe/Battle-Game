@@ -42,7 +42,7 @@ def get_status(user, bot):
 # user_move() function: asks user to choose a move, then does move against bot
 # user and bot are both Player objects
 
-def user_move(user, bot):
+def user_move(user, bot,number):
   user.regen_health() #regens health and subtracts one from regen health value if regen health value is over 1
   user.regen_energy() #user.regen_health but for energy
   user.poisoned(bot)#does damage every turn to the enemy if poisoned value is above one
@@ -75,14 +75,17 @@ def user_move(user, bot):
 # bot_move() function: makes bot randomly do one of its moves against user 
 # user and bot are both Player objects 
 
-def bot_move(bot, user): 
+def bot_move(bot, user,number): 
   stay = 0
   bot.regen_health()
   bot.regen_energy()
   bot.poisoned(user)
   bot.loose_energy(user)
   bot.armor_loss(user)
-  get_status(user, bot)
+  if number == 1:
+    get_status(user, bot)
+  else:
+    get_status(bot,user)
   print_slowly("computer move\n")
   #save reference values
   userstarthealth = user.health
@@ -100,11 +103,9 @@ def bot_move(bot, user):
   #we need the bot to remember
   #https://www.youtube.com/watch?v=dQw4w9WgXcQ OP CODE
   #probably use an if statement - winnerwannabe  
-  if stay == 0:
+  if number == 1:
     get_status(user, bot)
-    stay += 1
   else:
-    stay = 0
     get_status(bot,user)
   time.sleep(1)
   #the higher this number, the better

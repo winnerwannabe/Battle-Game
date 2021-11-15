@@ -6,9 +6,9 @@ from helper import print_slowly
 
 # Child Classes (special players)
 
-##############################################
-########### Child Classes ####################
-##############################################
+#####################################
+########### Child Classes ###########
+#####################################
 
 #character ideas:
 #piece maker/hero/
@@ -24,7 +24,7 @@ class Spiderman(Player): # create child class of Player
     self.moves["face punch"] = self.face_punch
     self.moves["flying kick"] = self.flying_kick
     self.moves["think"] = self.think
-    self.special_move = 4
+    self.special_move = 10
 
   def __str__(self): # returns a string when the object is called in a string context
       return(Spiderman.name)
@@ -738,7 +738,7 @@ class Mewtwo(Player):
       self.attack(self, random.randint(5, 15))
 
   def psycho_boost(self, enemy):
-      	damage = random.randint(30,80)
+      	zdamage = random.randint(30,80)
       	self.attack(enemy, damage)
 
 #medusa class
@@ -868,8 +868,8 @@ class covid19(Player):
     enemy.energy -= .05 * self.energy
 
   def poison(self,enemy):
-    enemy.poisoned_value += 4
-    enemy.poisoned_value += 10
+    enemy.poisoned_value += 4 * self.energy
+    enemy.poisoned_value += 10 * self.energy
 
 #firebeast class
 class firebeast(Player):
@@ -879,23 +879,24 @@ class firebeast(Player):
     Player.__init__(self, player_or_bot, "firebeast")
     self.moves["fire beam"] = self.fire_beam
     self.moves["beast slash"] = self.beast_slash
-    self.moves["spiritual flame"] = self.sacrid_flame
+    self.moves["spiritual flame"] = self.spirit_flame
     self.moves["wings of flame"] = self.wings_of_flame
 
   def wings_of_flame(self,enemy):
-    n = 10 # random number for health increase 
+    n = random.randint(10,20) # random number for health/defense increase 
     n *= self.energy # multiplied by energy level
     if n >= 0:
       self.defence += n 
+      self.health += n
       d = str(n)
-      print_slowly(self.name+" gained "+d+" defence")
+      print_slowly(self.name+" gained "+d+" defense and health")
       time.sleep(1)
     else:
       self.defence += 0
-      print_slowly(self.name+"gained 0 defence")
+      print_slowly(self.name+"gained 0 defense and health")
       time.sleep(1)
 
-  def sacrid_flame(self,enemy):
+  def spirit_flame(self,enemy):
     self.energy += .025
     self.attack(enemy, 15)
     self.defence += 10
@@ -936,7 +937,13 @@ class withered_stone(Player):
     self.attack(enemy,20)
   
   def absorb(self,enemy):
-    if self.energy > 0:
+    enemy.health -= 10
+    enemy.energy -= .2
+    if self.energy > 0.5:
+      self.health += 10 * self.energy
+    else:
+      self.health += 5
+    if self.energy > 0.5:
       self.energy += .2*self.energy
     else:
       self.energy += .01
@@ -950,4 +957,4 @@ class moss_growth(Player):
     self.moves["air slash"] = self.air_slash
 
   def air_slash(self,enemy):
-    self.attack(enemy,45)
+    self.attack(enemy,random.randint(50,70))

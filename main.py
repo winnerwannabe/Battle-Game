@@ -186,18 +186,18 @@ if __name__=="__main__":
 
     while True:
       if player1.p_or_b == 'p':
-        user_move(player1, player2)
+        user_move(player1, player2,1)
       elif player1.p_or_b == 'b':
-        bot_move(player1, player2)
+        bot_move(player1, player2,1)
       time.sleep(1)
       
       if not consider_result(player1, player2):
         break
 
       if player2.p_or_b == 'p':
-        user_move(player2, player1)
+        user_move(player2, player1,1)
       elif player2.p_or_b == 'b':
-        bot_move(player2, player1)
+        bot_move(player2, player1,2)
       time.sleep(1)
 
       if not consider_result(player2, player1):
