@@ -42,7 +42,7 @@ def get_status(user, bot):
 # user_move() function: asks user to choose a move, then does move against bot
 # user and bot are both Player objects
 
-def user_move(user, bot,number):
+def user_move(user, bot, number):
   user.regen_health() #regens health and subtracts one from regen health value if regen health value is over 1
   user.regen_energy() #user.regen_health but for energy
   user.poisoned(bot)#does damage every turn to the enemy if poisoned value is above one
@@ -75,8 +75,7 @@ def user_move(user, bot,number):
 # bot_move() function: makes bot randomly do one of its moves against user 
 # user and bot are both Player objects 
 
-def bot_move(bot, user,number): 
-  stay = 0
+def bot_move(bot, user, number): 
   bot.regen_health()
   bot.regen_energy()
   bot.poisoned(user)
