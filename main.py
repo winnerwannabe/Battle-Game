@@ -8,7 +8,7 @@ from player import *
 from special import *
 from helper import *
 from helper import print_slowly, print_quickly, invalad
-win, loss, rounds, winstreak = 0, 0, 0, 0
+win, loss, rounds = 0, 0, 0
 randomchoice = random.randint(1,2)
 
 class classChooser:
@@ -145,22 +145,21 @@ def player_chooser():
 def consider_result(user, bot):
   global loss
   global win
-  global winstreak
   if user.health <= 0:
     print_slowly("{} has no more health...\n".format(user))
     time.sleep(1)
     print_slowly(str(user)+" loses "+str(bot)+" wins!\n")
     loss += 1
-    winstreak = 0
     return(False)
 
   elif bot.health <= 0:
     print_slowly("{} has no more health...\n".format(bot))
     time.sleep(1)
     print_slowly(str(bot)+" loses "+str(user)+" wins!\n")
+    win += 1
     return(False)
 
-  elif bot.health <= 0 and user.health <= 0:
+  elif bot.health <= 0 and user.health <= 0 or isna(user.health) or isna(bot.health) or isna(user.energy) or isna(bot.energy) or isna(user.defence or isna(bot.defence)):
     print_slowly("no one has any health...\n")
     time.sleep(1)
     print_slowly("how???\n")

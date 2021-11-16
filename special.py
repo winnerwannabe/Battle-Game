@@ -117,7 +117,7 @@ class wyvern(Player):
     enemy.energy -= .05 * self.energy
 
   def claw_swipe(self,enemy):
-    self.attack(enemy, random.randint(30,50))
+    self.attack(enemy, random.randint(40,70))
 
 #thanos class
 class Thanos(Player):
