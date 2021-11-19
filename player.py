@@ -1,5 +1,5 @@
 #/bin/python3
-import random, time
+import random, time, math
 from helper import *
 from helper import print_slowly
 
@@ -63,6 +63,8 @@ class Player:
   # damage: integer (optional). If no 2nd argument given, does random damage.
  
   def attack(self, enemy, damage=-1): #defines attack
+    if math.isnan(enemy.health) == True:
+      enemy.health = 0
     if damage == -1:# if there is no 2nd argument 
       damage = random.randint(20, 40)# random number for damage
     damage *= self.energy# multiplies damage by energy level
@@ -91,8 +93,9 @@ class Player:
   # heal() method: move that increases a Player's own health (by random amount)  
   # enemy: Player object 
   
-  def heal(self, enemy): #defines heal
-    n = random.randint(25, 40) # random number for health increase 
+  def heal(self, enemy, healed=-1): #defines heal
+    if healed == -1:
+      n = random.randint(25, 40) # random number for health increase 
     n *= self.energy # multiplied by energy level
     if n >= 0: #if n is greater than or = too 0
       self.health += n #adds n to health
@@ -103,9 +106,10 @@ class Player:
       print_slowly(self.name + " healed self 0") # says that you healed nothing
       time.sleep(1)
 
-  def defend(self,enemy):
-    self.defence += random.randint(1,10) * self.energy
-    n = random.randint(1,10) # random number for health increase 
+  def defend(self,enemy, defence=-1):
+    if defence == -1:
+      self.defence += random.randint(1,10) * self.energy
+      n = random.randint(1,10) # random number for health increase 
     n *= self.energy # multiplied by energy level
     if n >= 0:
       self.defence += n 

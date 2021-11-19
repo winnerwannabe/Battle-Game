@@ -371,7 +371,10 @@ class winnerwannabe(Player):
                 time.sleep(1)
             break
           elif howleftorhowmuch == "2":#how much damage you take
-            da = float(input("chose how much damage you take: "))
+            try:
+              da = float(input("chose how much damage you take: "))
+            except:
+              da = float(input("chose how much damage you take: "))
             while da >= self.health:
               print_slowly("that will kill you!")
               da = float(input("chose how much damage you take: "))
@@ -410,7 +413,11 @@ class winnerwannabe(Player):
         elif howleftorhowmuch == "2":
           print_slowly("how much energy do you want to loose?\n")
           while True:
-            el = float(input(">"))
+            try:
+              el = float(input(">"))
+            except:
+              invalad()
+              el = float(input(">"))
             if self.energy < 0:
               if self.health + el*200*self.energy > 0:
                 self.health += el*200*self.energy

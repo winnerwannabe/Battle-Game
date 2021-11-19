@@ -159,7 +159,7 @@ def consider_result(user, bot):
     win += 1
     return(False)
 
-  elif bot.health <= 0 and user.health <= 0 or isna(user.health) or isna(bot.health) or isna(user.energy) or isna(bot.energy) or isna(user.defence or isna(bot.defence)):
+  elif bot.health <= 0 and user.health <= 0:
     print_slowly("no one has any health...\n")
     time.sleep(1)
     print_slowly("how???\n")
