@@ -136,7 +136,7 @@ def player_chooser():
     user = userClass.charClass(player_or_bot)
     print_slowly("your character is...\n")
     time.sleep(1)
-    print_slowly(str(user))
+    print_slowly(str(user) + "!")
     print("")
     time.sleep(1)
 
@@ -184,7 +184,7 @@ if __name__=="__main__":
     time.sleep(1)
 
     while True:
-      if player1.p_or_b == 'p':
+      if player1.p_or_b == 'p': #is a player or bot
         user_move(player1, player2,1)
       elif player1.p_or_b == 'b':
         bot_move(player1, player2,1)
@@ -193,8 +193,8 @@ if __name__=="__main__":
       if not consider_result(player1, player2):
         break
 
-      if player2.p_or_b == 'p':
-        user_move(player2, player1,1)
+      if player2.p_or_b == 'p': #is a player or bot
+        user_move(player2, player1,2)
       elif player2.p_or_b == 'b':
         bot_move(player2, player1,2)
       time.sleep(1)

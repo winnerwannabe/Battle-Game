@@ -32,12 +32,12 @@ def invalad():
 #### Helper functions #####
 ###########################
 # get_status() function: displays status of Player objects (user and bot) 
-def get_status(user, bot): 
+def get_status(p1, p2): 
   os.system('clear')
-  print("-" * 115)
-  user.status()
-  bot.status()
-  print("-" * 115)
+  print("-" * 101)
+  p1.status()
+  p2.status()
+  print("-" * 101)
 
 # user_move() function: asks user to choose a move, then does move against bot
 # user and bot are both Player objects
@@ -48,7 +48,10 @@ def user_move(user, bot, number):
   user.poisoned(bot)#does damage every turn to the enemy if poisoned value is above one
   user.loose_energy(bot) #user.poisoned but for energy
   user.armor_loss(bot) #user.poisoned but for defence
-  get_status(user, bot) #prints the get_Status define
+  if number == 1: #prints the get_Status define
+    get_status(user, bot)
+  else:
+    get_status(bot,user) 
   print_slowly("choose a move:\n")
   
   for m in user.moves: # for each key in user.moves dictionary
@@ -59,7 +62,10 @@ def user_move(user, bot, number):
     invalad()
     time.sleep(1)
     os.system("clear")
-    get_status(user,bot)
+    if number == 1:
+      get_status(user, bot)
+    else:
+      get_status(bot,user)
     for m in user.moves:
       print(m)
     answer = input(">").lower()
@@ -69,7 +75,10 @@ def user_move(user, bot, number):
   move(bot) # call user move against bot 
   
   # pause program for 1 second
-  get_status(user, bot)
+  if number == 1:
+    get_status(user, bot)
+  else:
+    get_status(bot,user)
   time.sleep(1)
 
 # bot_move() function: makes bot randomly do one of its moves against user 
@@ -82,9 +91,9 @@ def bot_move(bot, user, number):
   bot.loose_energy(user)
   bot.armor_loss(user)
   if number == 1:
-    get_status(user, bot)
+    get_status(bot, user)
   else:
-    get_status(bot,user)
+    get_status(user,bot)
   print_slowly("computer move\n")
   #save reference values
   userstarthealth = user.health
@@ -103,9 +112,9 @@ def bot_move(bot, user, number):
   #https://www.youtube.com/watch?v=dQw4w9WgXcQ OP CODE
   #probably use an if statement - winnerwannabe  
   if number == 1:
-    get_status(user, bot)
+    get_status(bot, user)
   else:
-    get_status(bot,user)
+    get_status(user,bot)
   time.sleep(1)
   #the higher this number, the better
   moveeffectplayerhealth = userstarthealth - user.health #ur stupeed
