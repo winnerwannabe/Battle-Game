@@ -7,6 +7,7 @@ from time import sleep
 from player import *
 from special import *
 from helper import *
+from mod import *
 from helper import print_slowly, print_quickly, invalad
 win, loss, rounds = 0, 0, 0
 randomchoice = random.randint(1,2)
@@ -41,6 +42,12 @@ class classChooser:
     'moss growth' : moss_growth
   }
   villains = [c.name for c in villains_map.values()]
+
+class modifyerchoice:
+  modmap = {
+    tough : "tough"
+  }
+  modmap = [c.name for c in modmap.values()]
 
 
   def __init__(self, h_or_v, selectedClass):
@@ -139,6 +146,24 @@ def player_chooser():
     print_slowly(str(user) + "!")
     print("")
     time.sleep(1)
+  
+  #print_slowly("would you like to choose a modifyer or would you like a random one? (c for choose and r for random)\n")
+  #answer = input(">").lower()
+  #time.sleep(2)
+  #if answer == 'c':
+  #  os.system('clear')
+  #  print()
+  #  time.sleep(1)
+  #  print_slowly("please choose a modifyer:\n")
+  #  time.sleep(1)
+  #  for i in modifyerchoice.modmap:
+  #    print_quickly(str(i)+"\n")
+  #    time.sleep(.5)
+    
+  #  userMod = None ;
+  #  userMod = modifyerchoice(input(">").lower())
+
+  #  while not userMod.
 
   return (user)
 
