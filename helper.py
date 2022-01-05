@@ -8,7 +8,7 @@ AISCORES = {"random": 0,}
 
 
 
-def print_slowly(str): #uses sleep and sys
+def print_slowly(str):
     for char in str:
       sleep(.025) #how fast print slowly prints
       sys.stdout.write(char)

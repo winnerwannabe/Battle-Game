@@ -566,10 +566,7 @@ class Blue_Fire64(Player):
 
   def enchant_armor(self, enemy):
     multi = 1
-    s1 = ""
-    s2 = ""
-    s3 = ""
-    s4 = ""
+    s = ""
     f = (random.randint(10,20))
     f *= self.energy
     if self.defence >= 100:
@@ -578,32 +575,26 @@ class Blue_Fire64(Player):
       self.defence += f*multi # makes defence go up by f
     else:
       self.defence += 0
-    if self.thorn_level >= 1:
-      s1 = "s"
-    if self.poison_thorn_level >= 1:
-      s2 = "s"
-    if self.energy_thorn_level >= 1:
-      s3 = "s"
-    if self.energy_poison_thorn_level >= 1:
-      s4 = "s"
+    if self.defence >= 100:
+      s = "s"
     print_slowly('defence went up by %.2f' % (f))
     thorn_type = random.randint(1,4)
     if thorn_type == 1:
       self.thorn += .025*self.energy/multi
       self.thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.thorn_level)+" level"+s1+" in thorns now!")
+      print_slowly("\nyou have "+str(self.thorn_level)+" level"+s+" in thorns now!")
     elif thorn_type == 2:
       self.poison_thorn += .5*self.energy/multi
       self.poison_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.poison_thorn_level)+" level"+s2+" in poison thorns now!")
+      print_slowly("\nyou have "+str(self.poison_thorn_level)+" level"+s+" in poison thorns now!")
     elif thorn_type == 3:
       self.energy_thorn += .01*self.energy/multi
       self.energy_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.energy_thorn_level)+" level"+s3+" in energy thorns now!")
+      print_slowly("\nyou have "+str(self.energy_thorn_level)+" level"+s+" in energy thorns now!")
     elif thorn_type == 4:
       self.energy_losses_thorns += .5*self.energy/multi
       self.energy_poison_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" level"+s4+" in energy poison thorns now!")
+      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" level"+s+" in energy poison thorns now!")
     time.sleep(2)
 
   def shield(self,enemy):

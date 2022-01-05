@@ -1,11 +1,10 @@
 #/bin/python3
 import random, time, math
-from mod import *
 from helper import *
 from helper import print_slowly
 
 #player class, parent of all classes
-class Player():
+class Player:
   name = 'Player'
 
   # __init__() method initializes new instance of Player
@@ -69,16 +68,10 @@ class Player():
     if damage == -1:# if there is no 2nd argument 
       damage = random.randint(20, 40)# random number for damage
     damage *= self.energy# multiplies damage by energy level
-    if enemy.energy >= 1:
-      self.health -= damage * enemy.thorn * enemy.energy
-      self.poisoned_value += enemy.poison_thorn * enemy.energy
-      self.energy_losses += enemy.energy_losses_thorns * enemy.energy
-      self.energy -= enemy.energy_thorn * enemy.energy
-    else:
-      self.health -= damage * enemy.thorn
-      self.poisoned_value += enemy.poison_thorn
-      self.energy_losses += enemy.energy_losses_thorns
-      self.energy -= enemy.energy_thorn
+    self.health -= damage * enemy.thorn * enemy.energy
+    self.poisoned_value += enemy.poison_thorn * enemy.energy
+    self.energy_losses += enemy.energy_losses_thorns * enemy.energy
+    self.energy -= enemy.energy_thorn * enemy.energy
     damage -= enemy.defence#should make damage damage - defence
     if enemy.imortal >= 1: # if enemy.imortal is greater than or equal to 1:
       if self.energy >= .75:
@@ -102,11 +95,11 @@ class Player():
   
   def heal(self, enemy, healed=-1): #defines heal
     if healed == -1:
-      healed = random.randint(25, 40) # random number for health increase 
-    healed *= self.energy # multiplied by energy level
-    if healed >= 0: #if n is greater than or = too 0
-      self.health += healed #adds n to health
-      print_slowly(str(self.name+" healed self "+"%.2f"%healed)) # says how much you healed
+      n = random.randint(25, 40) # random number for health increase 
+    n *= self.energy # multiplied by energy level
+    if n >= 0: #if n is greater than or = too 0
+      self.health += n #adds n to health
+      print_slowly(str(self.name+" healed self "+"%.2f"%n)) # says how much you healed
       time.sleep(1)
     else: #if n is not greater than or equal to 0
       self.health += 0 # adds 0 to health
@@ -115,11 +108,12 @@ class Player():
 
   def defend(self,enemy, defence=-1):
     if defence == -1:
-      defence = random.randint(1,10) # random number for defence increase
-    defence *= self.energy # multiplied by energy level
-    if defence >= 0:
-      self.defence += defence
-      print_slowly(str(self.name+" gained "+"%.2f"%defence+" defence"))
+      self.defence += random.randint(1,10) * self.energy
+      n = random.randint(1,10) # random number for health increase 
+    n *= self.energy # multiplied by energy level
+    if n >= 0:
+      self.defence += n 
+      print_slowly(str(self.name+" gained "+"%.2f"%n+" defence"))
       time.sleep(1)
     else:
       self.defence += 0
