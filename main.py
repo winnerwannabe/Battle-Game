@@ -63,17 +63,17 @@ class classChooser:
     return(None)
 
 def player_chooser():
-  print_slowly("is this character a player or bot? (p/b)\n")
+  print_slowly("is this character a player or bot? (p/b)")
   player_or_bot = input('>').lower()
   while player_or_bot != 'p' and player_or_bot != 'b':
     invalad()
     print_quickly("Valid inputs are 'p' or 'b'\n")
     player_or_bot = input('>').lower()
 
-  print_slowly("do you want to be the hero or the villain? (type 'h' for hero, 'v' for villain, and 'r'for random)\n")
+  print_slowly("do you want to be the hero or the villain? (type 'h' for hero, 'v' for villain, and 'r'for random)")
   mode = input('>').lower()
   while mode != 'h' and mode != 'v' and mode != "r":
-      print_slowly("invalid\n")
+      print_slowly("invalid")
       mode = input(">").lower()
   time.sleep(1)
   os.system('clear')
@@ -91,21 +91,21 @@ def player_chooser():
     if randomchoice == 1: #if a random is equal to 1 it chooses hero
       userchars = classChooser.heroes
       time.sleep(2)
-      print_slowly("you are...\n")
+      print_slowly("you are...")
       time.sleep(2)
       os.system("clear")
       print_slowly("a hero!")
     if randomchoice == 2: #if a random is equal to 2 it chooses villain
       userchars = classChooser.villains
       time.sleep(2)
-      print_slowly("you are...\n")
+      print_slowly("you are...")
       time.sleep(2)
       os.system("clear")
       print_slowly("a villain!")
 
   print()
   time.sleep(1)
-  print_slowly("Do you want to choose your character or do you want it to be random? (Type 'c' for choose and 'r' for random.)\n")
+  print_slowly("Do you want to choose your character or do you want it to be random? (Type 'c' for choose and 'r' for random.)")
   answer = input(">").lower()
   while answer != 'c' and answer != 'r':
       invalad()
@@ -116,7 +116,7 @@ def player_chooser():
     os.system('clear')
     print()
     time.sleep(1)
-    print_slowly("choose one of the following characters to fight against your enemy\n") 
+    print_slowly("choose one of the following characters to fight against your enemy") 
     time.sleep(1)
     for i in userchars:
       print_quickly(str(i)+"\n")
@@ -134,7 +134,7 @@ def player_chooser():
   elif answer == 'r':
     userClass = classChooser(mode, random.choice(userchars).lower())
     user = userClass.charClass(player_or_bot)
-    print_slowly("your character is...\n")
+    print_slowly("your character is...")
     time.sleep(1)
     print_slowly(str(user) + "!")
     print("")
@@ -146,37 +146,37 @@ def consider_result(user, bot):
   global loss
   global win
   if user.health <= 0:
-    print_slowly("{} has no more health...\n".format(user))
+    print_slowly("{} has no more health...".format(user))
     time.sleep(1)
-    print_slowly(str(user)+" loses "+str(bot)+" wins!\n")
+    print_slowly(str(user)+" loses "+str(bot)+" wins!")
     loss += 1
     return(False)
 
   elif bot.health <= 0:
-    print_slowly("{} has no more health...\n".format(bot))
+    print_slowly("{} has no more health...".format(bot))
     time.sleep(1)
-    print_slowly(str(bot)+" loses "+str(user)+" wins!\n")
+    print_slowly(str(bot)+" loses "+str(user)+" wins!")
     win += 1
     return(False)
 
   elif bot.health <= 0 and user.health <= 0:
-    print_slowly("no one has any health...\n")
+    print_slowly("no one has any health...")
     time.sleep(1)
-    print_slowly("how???\n")
+    print_slowly("how???")
     return(False)
   
   return(True)
 
 if __name__=="__main__":
   print()
-  print_slowly("welcome to the battlegame.\n")
+  print_slowly("welcome to the battlegame.")
   time.sleep(1)
 
   while True:
     player1 = player_chooser()
     os.system("clear")
     player2 = player_chooser()
-    print_slowly("the enemy {} will be fighting against is...\n".format(player1))  
+    print_slowly("the enemy {} will be fighting against is...".format(player1))  
     time.sleep(1)
     print_slowly("{}!".format(str(player2)))
     time.sleep(1)
@@ -205,8 +205,8 @@ if __name__=="__main__":
     time.sleep(1)
     print("_"*115)
     time.sleep(1)
-    print_slowly("player1 wins: " + str(win) + " player2 wins: " + str(loss) + "\n")
-    print_slowly("want to play another round? y/n\n")
+    print_slowly("player1 wins: " + str(win) + " player2 wins: " + str(loss) + "")
+    print_slowly("want to play another round? y/n")
     time.sleep(1)
     new_round = input(">").lower()
 

@@ -336,10 +336,6 @@ class winnerwannabe(Player):
     self.moves["sacrifice"] = self.sacrifice
     self.moves["potion of poison"] = self.potion_of_poison
     self.moves["corode"] = self.corode
-    self.thorn_level = 0
-    self.poison_thorn_level = 0
-    self.energy_thorn_level = 0
-    self.energy_poison_thorn_level = 0
 
   def corode(self,enemy):
     enemy.alpr += 5 * self.energy
@@ -351,15 +347,15 @@ class winnerwannabe(Player):
 
   def sacrifice(self,enemy):
     while True:
-      print_slowly("do you want to sacrifice health and gain energy (1) or sacrifice energy and gain health (2)\n")
+      print_slowly("do you want to sacrifice health and gain energy (1) or sacrifice energy and gain health (2)")
       health_or_energy = input(">")
       if health_or_energy == "1":
         while True:
-          print_slowly("would you like to choose how much health you will have left (1)  or how much damage you will take (2)\n")
+          print_slowly("would you like to choose how much health you will have left (1)  or how much damage you will take (2)")
           howleftorhowmuch = input(">")
           if howleftorhowmuch == "1":
             while True:
-              print_slowly("how much health would you like to have left?\n")
+              print_slowly("how much health would you like to have left?")
               howleft = float(input(">"))
               trueleft = float(self.health - howleft)
               if howleft > 0:
@@ -367,7 +363,7 @@ class winnerwannabe(Player):
                 self.energy += trueleft*self.energy*.005
                 break
               else:
-                print_slowly("that will kill you!\n")
+                print_slowly("that will kill you!")
                 time.sleep(1)
             break
           elif howleftorhowmuch == "2":#how much damage you take
@@ -382,15 +378,15 @@ class winnerwannabe(Player):
             self.energy += da * self.energy  * .005
             break
           else:
-            print_slowly("pick 1 or 2\n")
+            print_slowly("pick 1 or 2")
           break
         break
       elif health_or_energy == "2":
-        print_slowly("would you like to choose how much energy you will have left (1) or how much energy you will loose (2)\n")
+        print_slowly("would you like to choose how much energy you will have left (1) or how much energy you will loose (2)")
         howleftorhowmuch = input(">")
         if howleftorhowmuch == "1":
           while True:
-            print_slowly("how much energy do you want to have left?\n")
+            print_slowly("how much energy do you want to have left?")
             howleft = float(input(">"))
             trueleft = float(self.energy - howleft)
             if self.energy >= 1:
@@ -411,7 +407,7 @@ class winnerwannabe(Player):
                 time.sleep("1")
           break
         elif howleftorhowmuch == "2":
-          print_slowly("how much energy do you want to loose?\n")
+          print_slowly("how much energy do you want to loose?")
           while True:
             try:
               el = float(input(">"))
@@ -437,7 +433,7 @@ class winnerwannabe(Player):
           break
         break
       else:
-        print_slowly("please choose 1 or 2\n")
+        print_slowly("please choose 1 or 2")
 
 
   def energy_drain(self,enemy):
@@ -508,29 +504,29 @@ class winnerwannabe(Player):
     if thorn_type == 1:
       self.thorn += .025*self.energy/multi
       self.thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.thorn_level)+" level"+s+" in thorns now!")
+      print_slowly("you have "+str(self.thorn_level)+" level"+s+" in thorns now!")
     elif thorn_type == 2:
       self.poison_thorn += .5*self.energy/multi
       self.poison_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.poison_thorn_level)+" level"+s+" in poison thorns now!")
+      print_slowly("you have "+str(self.poison_thorn_level)+" level"+s+" in poison thorns now!")
     elif thorn_type == 3:
       self.energy_thorn += .01*self.energy/multi
       self.energy_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.energy_thorn_level)+" level"+s+" in energy thorns now!")
+      print_slowly("you have "+str(self.energy_thorn_level)+" level"+s+" in energy thorns now!")
     elif thorn_type == 4:
       self.energy_losses_thorns += .5*self.energy/multi
       self.energy_poison_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" level"+s+" in energy poison thorns now!")
+      print_slowly("you have "+str(self.energy_poison_thorn_level)+" level"+s+" in energy poison thorns now!")
     time.sleep(2)
 
   def slash_kill(self,enemy):
     self.health = 0
-    print_slowly("killed "+self.name+"\n")
+    print_slowly("killed "+self.name+"")
     print_slowly(self.name+" fell out of the world")
     time.sleep(1)
 
   def potion_of_weakness(self,enemy):
-    enemy.energy -= self.energy * .2
+    enemy.energy -= self.energy * .1
     enemy.elpr += .005 * self.energy 
     enemy.alpr += 2 * self.energy
     enemy.rounds_of_armor_loss += 2 * self.energy
@@ -582,19 +578,19 @@ class Blue_Fire64(Player):
     if thorn_type == 1:
       self.thorn += .025*self.energy/multi
       self.thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.thorn_level)+" level"+s+" in thorns now!")
+      print_slowly("you have "+str(self.thorn_level)+" level"+s+" in thorns now!")
     elif thorn_type == 2:
       self.poison_thorn += .5*self.energy/multi
       self.poison_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.poison_thorn_level)+" level"+s+" in poison thorns now!")
+      print_slowly("you have "+str(self.poison_thorn_level)+" level"+s+" in poison thorns now!")
     elif thorn_type == 3:
       self.energy_thorn += .01*self.energy/multi
       self.energy_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.energy_thorn_level)+" level"+s+" in energy thorns now!")
+      print_slowly("you have "+str(self.energy_thorn_level)+" level"+s+" in energy thorns now!")
     elif thorn_type == 4:
       self.energy_losses_thorns += .5*self.energy/multi
       self.energy_poison_thorn_level += 1 / multi
-      print_slowly("\nyou have "+str(self.energy_poison_thorn_level)+" level"+s+" in energy poison thorns now!")
+      print_slowly("you have "+str(self.energy_poison_thorn_level)+" level"+s+" in energy poison thorns now!")
     time.sleep(2)
 
   def shield(self,enemy):
@@ -745,7 +741,7 @@ class Mewtwo(Player):
       self.attack(self, random.randint(5, 15))
 
   def psycho_boost(self, enemy):
-      	zdamage = random.randint(30,80)
+      	damage = random.randint(30,80)  
       	self.attack(enemy, damage)
 
 #medusa class
@@ -799,20 +795,20 @@ class teacher(Player):
     if random.random() <= 0.75:
       apple_health = random.randint(25,50)
       self.health += apple_health
-      print_slowly("healed {} more health.\n".format(apple_health))
+      print_slowly("healed {} more health.".format(apple_health))
       time.sleep(1)
     else:
       if random.random() <= 0.75:
-        print_slowly("it was rotten\n")
+        print_slowly("it was rotten")
         rotten_apple_health = random.randint(0,30)
         self.health += rotten_apple_health
-        print_slowly("healed {} more health.\n".format(rotten_apple_health))
+        print_slowly("healed {} more health.".format(rotten_apple_health))
         time.sleep(1)
       else:
-        print_slowly("it was rotten\n")
+        print_slowly("it was rotten")
         rotten_apple_health = random.randint(0,30)
         self.health -= rotten_apple_health
-        print_slowly("you took {} damage.\n".format(rotten_apple_health))
+        print_slowly("you took {} damage.".format(rotten_apple_health))
         time.sleep(1)
 
   def pencil_stab(self, enemy):

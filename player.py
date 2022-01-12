@@ -12,7 +12,7 @@ class Player:
     self.p_or_b = player_or_bot # record if this is a human or comp
     self.name = name #what the name of the character your playing is ._.
     self.health = 100 #your health ._. if it <= 0 you die
-    self.hpr = 0 #how much health regen_health gives you
+    self.hpr = 1 #how much health regen_health gives you
     self.energy = 1 #most things are multiplied by this
     self.epr = .015 #hpr but for regen_energy
     self.defence = 0 #makes damage = damgage - defence
@@ -34,7 +34,9 @@ class Player:
     self.energy_thorn = 0 #drains energy when attacked
     self.energy_losses_thorns = 0 #poison thorn but for energy
     self.rohg = .2 #stands for rate of health gained. pretty self explanitory
-    self.roeg = .2 #rohg but replace health with energy.
+    self.roeg = .2 #rohg but replace health with energy
+    self.tpr = 1 #turns per round
+    self.stalled = 0
 
     # moves property is a dictionary - used to look up a Player's moves    
     # key = string (name of move), value = method (function for move)  
@@ -76,18 +78,18 @@ class Player:
     if enemy.imortal >= 1: # if enemy.imortal is greater than or equal to 1:
       if self.energy >= .75:
         damage = 0 # damage is 0
-        print_slowly("blocked! " + self.name + " did 0 damage to " + enemy.name + "\n")# says that the attack did nothing
+        print_slowly("blocked! " + self.name + " did 0 damage to " + enemy.name + "")# says that the attack did nothing
         enemy.imortal -= 1
       else:
         pass
       time.sleep(2)
     else:
       if damage <= 0: #if damgage is less than or equal to 0
-        print_slowly(self.name + " did 0 damage to " + enemy.name + "\n") # says that the attack did nothing
+        print_slowly(self.name + " did 0 damage to " + enemy.name + "") # says that the attack did nothing
         time.sleep(2)
       else: # damage is not less than or equal to 0
         enemy.health -= damage #subtracts damage from enemy's health
-        print_slowly(str(self.name+" did "+"%.2f"%damage+" damage to "+enemy.name + "\n"))
+        print_slowly(str(self.name+" did "+"%.2f"%damage+" damage to "+enemy.name + ""))
         time.sleep(2)
 
   # heal() method: move that increases a Player's own health (by random amount)  
