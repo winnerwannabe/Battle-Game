@@ -56,9 +56,14 @@ class classChooser:
         class_map = classChooser.heroes_map
       elif randomchoice == 2:
         class_map = classChooser.villains_map
-
-    self.charClass = class_map[selectedClass]
-    self.charStr = selectedClass
+    while True:
+      if selectedClass in class_map:
+        self.charClass = class_map[selectedClass]
+        self.charStr = selectedClass
+        break
+      else:
+        invalad()
+        selectedClass = input(">").lower()      
 
     return(None)
 
@@ -122,12 +127,8 @@ def player_chooser():
       print_quickly(str(i)+"\n")
       time.sleep(.5)
 
-    userClass = None ;
+    userClass = None;
     userClass = classChooser(mode, input(">").lower())
-
-    while not userClass.charClass: #skiping this for some reason
-      invalad()
-      userClass = classChooser(mode, input(">").lower())
 
     user = userClass.charClass(player_or_bot)
 
