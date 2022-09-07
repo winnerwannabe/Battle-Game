@@ -32,7 +32,6 @@ class Player:
     self.thorn = 0 #when attacked attacks equal to damage taken * thorn
     self.poison_thorn = 0 #poisons enemy when attacked
     self.energy_thorn = 0 #drains energy when attacked
-    self.energy_losses_thorns = 0 #poison thorn but for energy
     self.rohg = .2 #stands for rate of health gained. pretty self explanitory
     self.roeg = .2 #rohg but replace health with energy
     self.tpr = 1 #turns per round
@@ -72,7 +71,7 @@ class Player:
     damage *= self.energy# multiplies damage by energy level
     self.health -= damage * enemy.thorn * enemy.energy
     self.poisoned_value += enemy.poison_thorn * enemy.energy
-    self.energy_losses += enemy.energy_losses_thorns * enemy.energy
+    self.energy_losses += enemy.energy_thorn * enemy.energy
     self.energy -= enemy.energy_thorn * enemy.energy
     damage -= enemy.defence#should make damage damage - defence
     if enemy.imortal >= 1: # if enemy.imortal is greater than or equal to 1:

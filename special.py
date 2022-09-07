@@ -487,6 +487,9 @@ class winnerwannabe(Player):
       self.health += 0
 
   def enchant_armor(self, enemy):
+    thorn_level = 0
+    poison_thorn_level = 0
+    energy_thorn_level = 0
     multi = 1
     s = ""
     f = (random.randint(10,20))
@@ -500,23 +503,19 @@ class winnerwannabe(Player):
     if self.defence >= 100:
       s = "s"
     print_slowly('defence went up by %.2f' % (f))
-    thorn_type = random.randint(1,4)
+    thorn_type = random.randint(1,3)
     if thorn_type == 1:
       self.thorn += .025*self.energy/multi
-      self.thorn_level += 1 / multi
-      print_slowly("you have "+str(self.thorn_level)+" level"+s+" in thorns now!")
+      thorn_level += 1 / multi
+      print_slowly("you have "+str(thorn_level)+" level"+s+" in thorns now!")
     elif thorn_type == 2:
       self.poison_thorn += .5*self.energy/multi
-      self.poison_thorn_level += 1 / multi
-      print_slowly("you have "+str(self.poison_thorn_level)+" level"+s+" in poison thorns now!")
+      poison_thorn_level += 1 / multi
+      print_slowly("you have "+str(poison_thorn_level)+" level"+s+" in poison thorns now!")
     elif thorn_type == 3:
-      self.energy_thorn += .01*self.energy/multi
-      self.energy_thorn_level += 1 / multi
-      print_slowly("you have "+str(self.energy_thorn_level)+" level"+s+" in energy thorns now!")
-    elif thorn_type == 4:
-      self.energy_losses_thorns += .5*self.energy/multi
-      self.energy_poison_thorn_level += 1 / multi
-      print_slowly("you have "+str(self.energy_poison_thorn_level)+" level"+s+" in energy poison thorns now!")
+      self.energy_thorn += .05*self.energy/multi
+      energy_thorn_level += 1 / multi
+      print_slowly("you have "+str(energy_thorn_level)+" level"+s+" in energy thorns now!")
     time.sleep(2)
 
   def slash_kill(self,enemy):
